@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card mb-3">
+    <div class="card-body">
+        <p class="card-text">{{ post.content }}</p>
+        <p class="card-text">Posted by: {{ post.user.username }} on {{ post.created_at }}</p>
+        <p class="card-text">Likes: {{ like_count }}</p>
+    </div>
+</div>
+<a href="{% url 'feed' %}" class="btn btn-primary">Back to Feed</a>
+{% endblock %}

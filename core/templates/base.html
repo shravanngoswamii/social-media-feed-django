@@ -1,0 +1,59 @@
+{% load bootstrap5 %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Social Media Feed</title>
+    {% bootstrap_css %}
+    {% load static %}
+    {% comment %}Add this Style page if you are doing any custom styling{% endcomment %}
+    {% comment %} <link rel="stylesheet" href="{% static 'css/styles.css' %}" /> {% endcomment %}
+  </head>
+  <body>
+    {% bootstrap_messages %}
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{% url 'feed' %}">Social Media Feed</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              {% if user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'feed' %}">Feed</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'post_create' %}">New Post</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'user_profile' user.username %}">Profile</a>
+                </li>
+              {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'signup' %}">Sign Up</a>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+          <form class="d-flex" role="search" action="{% url 'search_users' %}">
+            <input class="form-control me-2" type="search" placeholder="Search Users" aria-label="Search" name="q" />
+            <button class="btn btn-outline-light" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+    </header>
+    <main class="container my-4">
+      {% block content %}
+
+      {% endblock %}
+    </main>
+    {% bootstrap_javascript %}
+  </body>
+</html>

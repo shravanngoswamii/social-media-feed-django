@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ profile_user.username }}'s Profile</h2>
+<p>Please <a href="{% url 'login' %}">log in</a> to view this user's profile.</p>
+{% endblock %}

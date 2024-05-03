@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Feed</h2>
+  {% for post in posts %}
+    <div class="card mb-3">
+      <div class="card-body">
+        <p class="card-text">{{ post.content }}</p>
+        <p class="card-text">
+          Posted by: <a href="{% url 'guest_profile' post.user.username %}">{{ post.user.username }}</a> on {{ post.created_at }}
+        </p>
+        <p class="card-text">Likes: {{ post.likes.count }}</p>
+      </div>
+      {% if post.comments.exists %}
+        <div class="card-footer">
+          <h5>Comments</h5>
+          {% for comment in post.comments.all %}
+            <div class="card mb-2">
+              <div class="card-body">
+                <p class="card-text">{{ comment.content }}</p>
+                <p class="card-text">Posted by: {{ comment.user.username }} on {{ comment.created_at }}</p>
+                {% if comment.user == request.user %}
+                  <a href="{% url 'comment_delete' comment.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                {% endif %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  {% endfor %}
+  <p>
+    Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'signup' %}">signup</a> to interact with posts.
+  </p>
+{% endblock %}
