@@ -78,7 +78,7 @@ python manage.py runserver
 The application should now be accessible at http://127.0.0.1:8000/.
 
 ## Video Demonstration:
-![Video Demo](Social-Media-Feed-Demo.mp4)
+https://github.com/shravanngoswamii/social-media-feed-django/raw/main/Social-Media-Feed-Demo.mp4
 
 ## Contributing
 Contributions are welcome! Please open an issue or submit a pull request.
